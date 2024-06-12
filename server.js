@@ -14,14 +14,14 @@ app.get('/', async (req, res) => {
     const cachedResult = cache.get('taskResult');
     if (cachedResult) {
         console.log(`${new Date().toLocaleString()} - Cache hit - ${cachedResult} day streak.`)
-        return res.json({ result: cachedResult, cache: 'hit' });
+        return res.json({ streak: cachedResult, cache: 'hit' });
     }
 
     try {
-        const result = await scrapeStreak();
-        cache.set('taskResult', result);
-        console.log(`${new Date().toLocaleString()} - Cache miss - ${result} day streak.`)
-        res.json({ result: result, cache: 'miss' });
+        const streak = await scrapeStreak();
+        cache.set('taskResult', streak);
+        console.log(`${new Date().toLocaleString()} - Cache miss - ${streak} day streak.`)
+        res.json({ streak, cache: 'miss' });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

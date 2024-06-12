@@ -33,7 +33,7 @@ You can now access your access your your streak at `http://localhost:40573`. The
     "cache": "miss"
 }
 ```
-* `Streak` is the users current streak
-* `Cache` indicates if this was served from cache or if it was freshly fetched
+* `streak` is the users current streak
+* `cache` indicates if this was served from cache or if it was freshly fetched
 
 New data will be retrieved up to once a day to increase performance and decrease abuse. It is scraping after all. 
