@@ -1,7 +1,10 @@
-// task.js
 const puppeteer = require('puppeteer');
 require('dotenv').config();
 
+/**
+ * Scrape the current Duolingo streak of the user.
+ * @returns {Promise<number>} The current Duolingo streak of the user
+ */
 async function scrapeStreak() {
     const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     const page = await browser.newPage();

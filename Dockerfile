@@ -30,7 +30,8 @@ COPY . .
 EXPOSE 3000
 
 # Define environment variable
-ENV DUOLINGO_USER=your_duolingo_username
+ENV DUOLINGO_USER=YOUR_DUOLINGO_USERNAME
+ENV SECRET=
 
 # Command to run the application
 CMD ["yarn", "start"]
