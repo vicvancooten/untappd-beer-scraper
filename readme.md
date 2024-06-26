@@ -14,12 +14,13 @@ streak-scraper:
     environment:
         DUOLINGO_USER: DUOLINGO_USERNAME
         SECRET: [random string]
+        TTL: 43200
     restart: unless-stopped
 ```
 
 ## Docker CLI
 ```
-docker run -p 40573:3000 -e DUOLINGO_USER="DUOLINGO_USERNAME" -e secret [secret] vicvc/duolingo-streak-scraper:latest
+docker run -p 40573:3000 -e DUOLINGO_USER="DUOLINGO_USERNAME" -e secret [secret] -e TTL 43200 vicvc/duolingo-streak-scraper:latest
 ```
 
 ## Node.js (manually)
@@ -44,6 +45,7 @@ yarn start
 * The lefthand port (40573 in the example) can be changed to whatever
 * Your DUOLINGO_USER is required and is the user that will be scraped.
 * If you set the secret, you'll get an additional route `/refresh?secret=[your secret]` that you can use to force the cache to expire, if needed.
+* Cache is set to 1 day by default, but can be tweaked by setting the TTL variable.
 
 You can now access your access your your streak at `http://localhost:40573`. The response will be like this.
 
