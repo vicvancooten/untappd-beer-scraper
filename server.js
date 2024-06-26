@@ -9,7 +9,7 @@ const app = express();
 const port = 3000;
 
 // Streak won't change often, so cache the response for a day
-const cache = new NodeCache({ stdTTL: 86400 });
+const cache = new NodeCache({ stdTTL: process.env.TTL ? parseInt(process.env.TTL) : 86400 });
 
 /**
  * Main route
