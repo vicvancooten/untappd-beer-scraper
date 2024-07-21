@@ -31,7 +31,8 @@ EXPOSE 3000
 
 # Define environment variable
 ENV DUOLINGO_USER=YOUR_DUOLINGO_USERNAME
-ENV SECRET=
+ENV SECRET=[RANDOM STRING]
+ENV TTL=43200
 
 # Command to run the application
 CMD ["yarn", "start"]
