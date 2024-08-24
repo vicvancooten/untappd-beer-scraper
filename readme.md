@@ -1,3 +1,7 @@
+```
+Archiving this repository, since Duolingo has removed the public profile pages.  
+```
+
 # Streak scraper
 Simple tool that uses puppeteer to find a user's current duolingo streak and responds with an API response. Meant to be used for a single user to prevent abuse. Used for fun on [my personal website](https://github.com/Duveaux/vtvc.nl).
 
