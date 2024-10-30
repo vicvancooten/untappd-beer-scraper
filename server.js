@@ -3,7 +3,7 @@
  * Contains the main routes and logic for the server
  */
 const express = require('express');
-const scrapeStreak = require('./scrape');
+const scrapeStats = require('./scrape');
 const NodeCache = require('node-cache');
 const app = express();
 const port = 3000;
@@ -13,18 +13,18 @@ const cache = new NodeCache({ stdTTL: process.env.TTL ? parseInt(process.env.TTL
 
 /**
  * Main route
- * Scrapes, caches and returns the current streak
+ * Scrapes, caches and returns the data
  * Prefers to respond from cache
  */
 app.get('/', async (req, res) => {
     const cachedResult = cache.get('taskResult');
     if (cachedResult) {
         // Log it, for internal monitoring
-        console.log(`${new Date().toLocaleString()} - Cache hit - ${cachedResult} day streak.`)
+        console.log(`${new Date().toLocaleString()} - Cache hit - ${cachedResult}.`)
 
         // Return the cached result
         return res.json({
-            streak: cachedResult,
+            data: cachedResult,
             cache: 'hit',
             next_refresh: new Date(cache.getTtl('taskResult')).toLocaleString('nl-NL')
         });
@@ -32,11 +32,14 @@ app.get('/', async (req, res) => {
 
     // Cache miss, scrape and cache the streak
     try {
-        const streak = await scrapeStreak();
-        cache.set('taskResult', streak);
-        console.log(`${new Date().toLocaleString()} - Cache miss - ${streak} day streak.`)
+        const data = await scrapeStats();
+        cache.set('taskResult', data);
+
+        console.log(`${new Date().toLocaleString()} - Cache miss - ${data}.`)
+
         res.json({
-            streak, cache: 'miss',
+            data,
+            cache: 'miss',
             next_refresh: new Date(cache.getTtl('taskResult')).toLocaleString('nl-NL')
         });
     } catch (error) {
@@ -59,14 +62,14 @@ app.get('/refresh', async (req, res) => {
     cache.del('taskResult');
 
     // Refetch and cache
-    const streak = await scrapeStreak();
-    cache.set('taskResult', streak);
-    console.log(`${new Date().toLocaleString()} - Cache cleared and refetched - ${streak} day streak.`)
+    const data = await scrapeStats();
+    cache.set('taskResult', data);
+    console.log(`${new Date().toLocaleString()} - Cache cleared and refetched - ${data}.`)
 
     // Respond with the new streak
     res.json({
         message: 'Forced a refresh',
-        streak,
+        data,
         next_refresh: new Date(cache.getTtl('taskResult')).toLocaleString('nl-NL')
     });
 })

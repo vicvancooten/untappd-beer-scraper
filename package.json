@@ -1,12 +1,12 @@
 {
-  "name": "duolingo-streak-scraper",
+  "name": "untappd-streak-scraper",
   "version": "1.0.0",
-  "description": "Scrapes the current streak from the duolingo profile page. Targets a single user and only scrapes once a day.",
+  "description": "Scrapes data from untappd public profiles and returns an API.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
-  "repository": "https://github.com/vtvc/duolingo-streak-scraper",
+  "repository": "https://github.com/vtvc/untappd-beer-scraper",
   "author": "Vic van Cooten",
   "license": "MIT",
   "private": false,
