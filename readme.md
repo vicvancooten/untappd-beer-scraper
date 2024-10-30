@@ -1,7 +1,3 @@
-```
-Archiving this repository, since Duolingo has removed the public profile pages.  
-```
-
 # Beer scraper
 Simple tool that scrapes some information from untappd and makes it available in an API. Meant to be used for a single user to prevent abuse. Used for fun on [my personal website](https://github.com/Duveaux/vtvc.nl).
 
